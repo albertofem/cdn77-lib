@@ -68,7 +68,19 @@ abstract class AbstractMethod
 		if(empty($this->params))
 			return "";
 
-		return "?" . http_build_str($this->params);
+		return "?" . $this->http_build_str($this->params);
+	}
+
+	private function http_build_str($query)
+	{
+		$query_array = array();
+		
+		foreach($query as $key => $key_value)
+		{
+			$query_array[] = $key . '=' . urlencode($key_value);
+		}
+		
+		return implode( '&', $query_array);
 	}
 
 	public function execute()
