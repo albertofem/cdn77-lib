@@ -1,0 +1,21 @@
+{
+	"name": "albertofem/cdn77-lib",
+	"description": "PHP library to work with CDN77 API",
+	"keywords": ["cdn77 api library"],
+	"homepage": "http://albertofem.com",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Alberto Fernandez",
+			"email": "albertofem@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"kriswallsmith/buzz": "dev-master",
+		"albertofem/rsync-lib": "dev-master"
+	},
+	"autoload": {
+		"psr-0": { "AFM": "src/" }
+	}
+}

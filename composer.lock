@@ -1,0 +1,26 @@
+{
+    "hash": "fa97c8375e1fe31cc644c0b0c3c180e6",
+    "packages": [
+        {
+            "package": "albertofem/rsync-lib",
+            "version": "dev-master",
+            "source-reference": "2062c5a1147c05dc2449ff7d8e2a0f1b7ac2d99a",
+            "commit-date": "1347388435"
+        },
+        {
+            "package": "kriswallsmith/buzz",
+            "version": "dev-master",
+            "source-reference": "988bf14201ffbed940f23b42f87302e6adec4c21",
+            "commit-date": "1345206213"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "kriswallsmith/buzz": 20,
+        "albertofem/rsync-lib": 20
+    }
+}
