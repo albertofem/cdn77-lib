@@ -12,6 +12,8 @@
 namespace AFM\Cdn77\Method;
 
 use Buzz\Browser;
+use AFM\Cdn77\Response\Response;
+use AFM\Cdn77\Response\ErrorResponse;
 
 abstract class AbstractMethod
 {
@@ -88,10 +90,21 @@ abstract class AbstractMethod
 		// construct request
 		if($this->getMethod() == self::METHOD_GET)
 		{
-			return $this->doGetRequest();
+			$rawResponse = $this->doGetRequest();
+		}
+		else
+		{
+			$rawResponse = $this->doPostRequest();
 		}
 
-		return $this->doPostRequest();
+		$arrayData = json_decode($rawResponse, true);
+
+		if(isset($arrayData['error']) && $arrayData['error'] == true)
+			return new ErrorResponse;
+
+		$rawResponse = $this->processResponse($rawResponse, $arrayData);
+
+		return $rawResponse;
 	}
 
 	public function getMethod()
@@ -116,6 +129,14 @@ abstract class AbstractMethod
 	{
 		$browser = new Browser;
 		$response = $browser->post($this->getRequestUri(), array(), $this->getQueryString());
+
+		return $response;
+	}
+
+	protected function processResponse($rawResponse, $arrayData)
+	{
+		$response = new Response($rawResponse);
+		$response->setArrayData($arrayData);
 
 		return $response;
 	}

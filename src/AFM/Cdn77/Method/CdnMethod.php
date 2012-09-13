@@ -20,6 +20,11 @@ abstract class CdnMethod extends AbstractMethod
 	 */
 	protected $cdn;
 
+	public function __construct()
+	{
+		$this->params['id'] = "all";
+	}
+
 	/**
 	 * @param \AFM\Cdn77\CDN $cdn
 	 */

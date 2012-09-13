@@ -13,15 +13,12 @@ namespace AFM\Cdn77\Method;
 
 class Purge extends CdnMethod
 {
+	const REQUEST_URI = "https://client.cdn77.com/api/purge";
+
 	/**
 	 * @var array
 	 */
 	protected $files = array();
-
-	/**
-	 * @var string
-	 */
-	protected $requestUri = "https://client.cdn77.com/api/purge";
 
 	public function getMethod()
 	{
@@ -59,13 +56,13 @@ class Purge extends CdnMethod
 		return parent::execute();
 	}
 
-	public function setRequestUri($requestUri)
+	protected function processResponse($rawResponse)
 	{
-		$this->requestUri = $requestUri;
+
 	}
 
 	public function getRequestUri()
 	{
-		return $this->requestUri;
+		return self::REQUEST_URI;
 	}
 }
