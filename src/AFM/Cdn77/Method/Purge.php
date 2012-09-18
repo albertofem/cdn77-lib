@@ -56,11 +56,6 @@ class Purge extends CdnMethod
 		return parent::execute();
 	}
 
-	protected function processResponse($rawResponse)
-	{
-
-	}
-
 	public function getRequestUri()
 	{
 		return self::REQUEST_URI;
