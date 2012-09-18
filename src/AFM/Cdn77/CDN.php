@@ -21,11 +21,6 @@ class CDN
 	/**
 	 * @var string
 	 */
-	protected $alias;
-
-	/**
-	 * @var string
-	 */
 	protected $url;
 
 	/**
@@ -39,20 +34,9 @@ class CDN
 	protected $nameSlug;
 
 	/**
-	 * @param string $alias
+	 * @var int
 	 */
-	public function setAlias($alias)
-	{
-		$this->alias = $alias;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getAlias()
-	{
-		return $this->alias;
-	}
+	protected $cacheExpiration;
 
 	/**
 	 * @param int $id
@@ -110,5 +94,21 @@ class CDN
 	public function getNameSlug()
 	{
 		return $this->nameSlug;
+	}
+
+	/**
+	 * @param int $cacheExpiration
+	 */
+	public function setCacheExpiration($cacheExpiration)
+	{
+		$this->cacheExpiration = $cacheExpiration;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCacheExpiration()
+	{
+		return $this->cacheExpiration;
 	}
 }

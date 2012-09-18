@@ -15,6 +15,13 @@ class ErrorResponse extends Response
 {
 	protected $description;
 
+	public function __construct($rawResponse, $description)
+	{
+		parent::__construct($rawResponse);
+
+		$this->setDescription($description);
+	}
+
 	public function setDescription($description)
 	{
 		$this->description = $description;

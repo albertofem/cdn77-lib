@@ -28,6 +28,8 @@ abstract class AbstractMethod
 
 	protected $method;
 
+	private $rawResponse;
+
 	public function setLogin($login)
 	{
 		$this->login = $login;
@@ -87,20 +89,12 @@ abstract class AbstractMethod
 
 	public function execute()
 	{
-		// construct request
-		if($this->getMethod() == self::METHOD_GET)
-		{
-			$rawResponse = $this->doGetRequest();
-		}
-		else
-		{
-			$rawResponse = $this->doPostRequest();
-		}
+		$rawResponse = $this->getRawResponse();
 
 		$arrayData = json_decode($rawResponse, true);
 
 		if(isset($arrayData['error']) && $arrayData['error'] == true)
-			return new ErrorResponse;
+			return new ErrorResponse($rawResponse, $arrayData['description']);
 
 		$rawResponse = $this->processResponse($rawResponse, $arrayData);
 
@@ -139,6 +133,36 @@ abstract class AbstractMethod
 		$response->setArrayData($arrayData);
 
 		return $response;
+	}
+
+	public function getRawResponse()
+	{
+		if(is_null($this->rawResponse))
+		{
+			// construct request
+			if($this->getMethod() == self::METHOD_GET)
+			{
+				$this->rawResponse = $this->doGetRequest();
+			}
+			else
+			{
+				$this->rawResponse = $this->doPostRequest();
+			}
+		}
+
+		return $this->rawResponse;
+	}
+
+	/**
+	 * Use this to set manual response if you need it.
+	 * Make sure you call it before the execute. This also
+	 * eases testing
+	 *
+	 * @param $rawResponse
+	 */
+	public function setRawResponse($rawResponse)
+	{
+		$this->rawResponse = $rawResponse;
 	}
 
 	abstract public function getRequestUri();
